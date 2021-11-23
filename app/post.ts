@@ -1,5 +1,6 @@
 import parseFrontMatter from "front-matter";
 import fs from "fs/promises";
+import { marked } from "marked";
 import path from "path";
 import invariant from "tiny-invariant";
 
@@ -40,4 +41,21 @@ export async function getPosts() {
       };
     })
   );
+}
+
+export async function getPost(slug: string) {
+  let filepath = path.join(postsPath, slug + ".md");
+
+  let file = await fs.readFile(filepath);
+
+  let { attributes, body } = parseFrontMatter(file.toString());
+
+  invariant(
+    isValidPostAttributes(attributes),
+    `Post ${filepath} is missing attributes`
+  );
+
+  let html = marked(body);
+
+  return { slug, html, title: attributes.title };
 }
