@@ -93,6 +93,7 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
               <li>
                 <Link to="/posts">Posts</Link>
               </li>
+
               <li>
                 <a href="https://remix.run/docs">Remix Docs</a>
               </li>
