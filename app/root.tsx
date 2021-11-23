@@ -1,4 +1,5 @@
 import * as React from "react";
+import type { LinksFunction } from "remix";
 import {
   Link,
   Links,
@@ -8,13 +9,11 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
-  useLocation
+  useLocation,
 } from "remix";
-import type { LinksFunction } from "remix";
-
+import darkStylesUrl from "~/styles/dark.css";
 import deleteMeRemixStyles from "~/styles/demos/remix.css";
 import globalStylesUrl from "~/styles/global.css";
-import darkStylesUrl from "~/styles/dark.css";
 
 /**
  * The `links` export is a function that returns an array of objects that map to
@@ -30,9 +29,9 @@ export let links: LinksFunction = () => {
     {
       rel: "stylesheet",
       href: darkStylesUrl,
-      media: "(prefers-color-scheme: dark)"
+      media: "(prefers-color-scheme: dark)",
     },
-    { rel: "stylesheet", href: deleteMeRemixStyles }
+    { rel: "stylesheet", href: deleteMeRemixStyles },
   ];
 };
 
@@ -53,7 +52,7 @@ export default function App() {
 
 function Document({
   children,
-  title
+  title,
 }: {
   children: React.ReactNode;
   title?: string;
@@ -90,6 +89,9 @@ function Layout({ children }: React.PropsWithChildren<{}>) {
             <ul>
               <li>
                 <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/posts">Posts</Link>
               </li>
               <li>
                 <a href="https://remix.run/docs">Remix Docs</a>
@@ -238,7 +240,7 @@ const RouteChangeAnnouncement = React.memo(() => {
         position: "absolute",
         width: "1px",
         whiteSpace: "nowrap",
-        wordWrap: "normal"
+        wordWrap: "normal",
       }}
     >
       {innerHtml}
